@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchCategories } from "../slices/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/hook";
+import Category from "./Category";
 
 const CategoriesList = () => {
   const dispatch = useAppDispatch();
@@ -23,15 +24,15 @@ const CategoriesList = () => {
   return (
     <div>
       <h1>Meal Categories</h1>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.idCategory}>
-            <h2>{category.strCategory}</h2>
-            <img src={category.strCategoryThumb} alt={category.strCategory} />
-            <p>{category.strCategoryDescription}</p>
-          </li>
-        ))}
-      </ul>
+      {categories.map((category, index) => (
+        <Category
+          key={category.idCategory}
+          title={category.strCategory}
+          urlToImg={category.strCategoryThumb}
+          description={category.strCategoryDescription}
+          index={index}
+        />
+      ))}
     </div>
   );
 };
